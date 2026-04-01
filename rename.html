@@ -1,0 +1,124 @@
+// --- CONFIGURATION ---
+// CHANGE YOUR WHATSAPP NUMBER HERE (Include Country Code, omit + or spaces)
+const WHATSAPP_NUMBER = "+91 91333 15053"; 
+
+document.addEventListener("DOMContentLoaded", () => {
+    
+    // 1. DYNAMICALLY GENERATE 18 PRODUCT CARDS WITH CATEGORIES AND RATINGS
+    const galleryGrid = document.getElementById('gallery-grid');
+    const categories = ['home', 'office', 'more']; // Categories for the filter
+    
+    // Loop only 18 times now
+    for (let i = 1; i <= 18; i++) {
+        const message = `Hi Agastya Window Blinds, I am interested in buying Design #${i}. Can you provide more details?`;
+        const encodedMessage = encodeURIComponent(message);
+        const waLink = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
+        
+        const imgPath = `assets/design${i}.jpg`;
+        
+        // Assign a category systematically so the filters work nicely out of the box
+        const assignedCategory = categories[i % 3]; 
+        
+        // Generate a random rating between 4.5 and 5.0 for aesthetics
+        const rating = (Math.random() * (5.0 - 4.5) + 4.5).toFixed(1);
+
+        const cardHTML = `
+            <div class="product-card fade-up" data-category="${assignedCategory}">
+                <div class="img-container" onclick="openLightbox('${imgPath}')">
+                    <img src="${imgPath}" alt="Agastya Blind Design ${i}" loading="lazy">
+                </div>
+                <div class="product-info">
+                    <h3>Design #${i} 
+                        <span>
+                            <span class="stars">★★★★★</span>
+                            <span class="rating-text">${rating}</span>
+                        </span>
+                    </h3>
+                    <a href="${waLink}" target="_blank" class="btn-wa">Book Now on WhatsApp</a>
+                </div>
+            </div>
+        `;
+        galleryGrid.insertAdjacentHTML('beforeend', cardHTML);
+    }
+
+    // 2. PRODUCT FILTERS LOGIC
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const productCards = document.querySelectorAll('.product-card');
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            // Remove active state from all buttons
+            filterBtns.forEach(b => b.classList.remove('active'));
+            // Add active state to clicked button
+            btn.classList.add('active');
+
+            const filterValue = btn.getAttribute('data-filter');
+
+            productCards.forEach(card => {
+                if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
+                    card.classList.remove('hide');
+                    setTimeout(() => { card.style.opacity = '1'; card.style.transform = 'translateY(0)'; }, 50);
+                } else {
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(20px)';
+                    setTimeout(() => { card.classList.add('hide'); }, 400); // Wait for transition
+                }
+            });
+        });
+    });
+
+    // 3. IOS FULLSCREEN MENU LOGIC
+    const menuBtn = document.getElementById('menu-btn');
+    const closeMenuBtn = document.getElementById('close-menu-btn');
+    const iosMenu = document.getElementById('ios-menu');
+    const menuLinkDesigns = document.getElementById('menu-link-designs');
+
+    const toggleMenu = () => {
+        iosMenu.classList.toggle('active');
+        if(iosMenu.classList.contains('active')) {
+            document.body.style.overflow = 'hidden'; // Stop background scrolling
+        } else {
+            document.body.style.overflow = 'auto';
+        }
+    };
+
+    menuBtn.addEventListener('click', toggleMenu);
+    closeMenuBtn.addEventListener('click', toggleMenu);
+    menuLinkDesigns.addEventListener('click', toggleMenu); // Close menu when clicking the button
+
+    // 4. IOS LIGHTBOX (IMAGE VIEWER) LOGIC
+    const lightbox = document.getElementById('ios-lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const closeBtn = document.querySelector('.lightbox .close-btn');
+
+    window.openLightbox = (src) => {
+        lightboxImg.src = src;
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    };
+
+    const closeLightbox = () => {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = 'auto';
+        setTimeout(() => { lightboxImg.src = ''; }, 400);
+    };
+
+    closeBtn.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', (e) => {
+        if(e.target === lightbox) closeLightbox();
+    });
+
+    // 5. SMOOTH SCROLL ANIMATIONS (INTERSECTION OBSERVER)
+    const observerOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+});
