@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agastya Window Blinds</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="ios-nav">
+        <div class="nav-content">
+            <a href="#" class="logo">
+                <img src="assets/logo.png" alt="Agastya Logo" class="nav-logo-img">
+                <span class="logo-text">AGASTYA</span>
+            </a>
+            
+            <!-- Hamburger Menu Icon -->
+            <div class="hamburger" id="menu-btn">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- iOS Fullscreen Menu Overlay -->
+    <div id="ios-menu" class="ios-menu">
+        <div class="menu-inner">
+            <span class="close-menu" id="close-menu-btn">&times;</span>
+            <div class="menu-text">
+                <h2>About Agastya Blinds</h2>
+                <p>Agastya Window Blinds was founded on a simple principle: to transform ordinary spaces into extraordinary environments. We specialize in custom-fitted, premium window treatments that perfectly balance natural light, privacy, and interior aesthetics. Whether it's a cozy living room or a corporate office, our team ensures a flawless fit every time.</p>
+                
+                <h2 style="margin-top: 40px;">Our Product Quality</h2>
+                <p>We refuse to compromise on quality. Our blinds are manufactured using industry-standard, UV-resistant fabrics that prevent fading over time. The hardware and rolling mechanisms undergo strict stress tests to ensure smooth, butter-like operation for years. We offer a 100% quality guarantee, ensuring your investment is durable, elegant, and standard-compliant.</p>
+                
+                <div style="margin-top: 40px;">
+                    <a href="#products" class="btn-primary" id="menu-link-designs">View Designs</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <video autoplay muted loop playsinline class="hero-video">
+            <source src="assets/hero-video.mp4" type="video/mp4">
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="hero-content fade-up">
+            <img src="assets/logo.png" alt="Agastya Logo" class="hero-logo-img">
+            <h1>AGASTYA WINDOW BLINDS</h1>
+            <p>Premium Quality. Elegant Designs. Perfect Lighting.</p>
+            <a href="#products" class="btn-primary">Explore Designs</a>
+        </div>
+    </header>
+
+    <!-- Products Gallery with Filters -->
+    <section id="products" class="section bg-light">
+        <div class="container">
+            <div class="section-title fade-up">
+                <h2>Our Premium Collection</h2>
+                <p>Find the perfect fit for your space. Tap to view or book.</p>
+            </div>
+            
+            <!-- Filters -->
+            <div class="filters fade-up">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="home">Home</button>
+                <button class="filter-btn" data-filter="office">Office</button>
+                <button class="filter-btn" data-filter="more">More</button>
+            </div>
+
+            <!-- 18 Generated Images go here -->
+            <div id="gallery-grid" class="gallery-grid"></div>
+        </div>
+    </section>
+
+    <!-- iOS Lightbox (Image Viewer) -->
+    <div id="ios-lightbox" class="lightbox">
+        <div class="lightbox-content">
+            <span class="close-btn">&times;</span>
+            <img id="lightbox-img" src="" alt="Window Blind Design">
+        </div>
+    </div>
+
+    <!-- Blogs Section -->
+    <section id="blogs" class="section">
+        <div class="container fade-up">
+            <div class="section-title">
+                <h2>Insights & Inspiration</h2>
+                <p>Read our latest articles on styling and maintaining your window blinds.</p>
+            </div>
+            <div class="blog-grid">
+                <div class="blog-card">
+                    <span class="blog-tag">Design</span>
+                    <h3>Zebra Blinds: The 2024 Trend</h3>
+                    <p>Discover how dual-layer fabrics offer the perfect balance of privacy and light.</p>
+                </div>
+                <div class="blog-card">
+                    <span class="blog-tag">Quality</span>
+                    <h3>Why Materials Matter</h3>
+                    <p>Learn about our UV-resistant fabrics and durable mechanical parts.</p>
+                </div>
+                <div class="blog-card">
+                    <span class="blog-tag">Maintenance</span>
+                    <h3>Keep Your Blinds Brand New</h3>
+                    <p>Simple cleaning techniques to ensure your blinds last for years.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section bg-light">
+        <div class="container fade-up">
+            <div class="section-title">
+                <h2>Get In Touch</h2>
+                <p>Have a query? Reach out to us directly.</p>
+            </div>
+            <div class="contact-links">
+                
+                <a href="tel:+91 91333 15053" class="contact-card">
+                    <div class="icon">📞</div>
+                    <h3>Call Us</h3>
+                    <p>+91 91333 15053</p>
+                </a>
+                
+                <a href="https://wa.me/919133315053?text=Hi%20Agastya%20Blinds,%20I%20have%20a%20query." target="_blank" class="contact-card">
+                    <div class="icon">💬</div>
+                    <h3>WhatsApp</h3>
+                    <p>Chat with us</p>
+                </a>
+                
+                <a href="mailto:agastyawindowsblinds@gmail.com" class="contact-card">
+                    <div class="icon">✉️</div>
+                    <h3>Email</h3>
+                    <p>agastyawindowsblinds@gmail.com</p>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <h2>AGASTYA WINDOW BLINDS</h2>
+                <p>Premium aesthetics for your windows.</p>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Agastya Window Blinds. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
