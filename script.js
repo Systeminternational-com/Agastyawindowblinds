@@ -1,34 +1,53 @@
 // --- CONFIGURATION ---
-// CHANGE YOUR WHATSAPP NUMBER HERE (Include Country Code, omit + or spaces)
-const WHATSAPP_NUMBER = "+91 91333 15053"; 
+const WHATSAPP_NUMBER = "919133315053"; 
+
+// --- EDIT YOUR PRODUCT NAMES AND CATEGORIES HERE ---
+// You can change the "name" to whatever you like. 
+// "category" must be either "home", "office", or "more" to match the filters.
+const productData = [
+    { id: 1, name: "Premium Zebra Blind", category: "home" },
+    { id: 2, name: "Office Roller Blind", category: "office" },
+    { id: 3, name: "Classic Wooden Blind", category: "more" },
+    { id: 4, name: "Blackout Roller Blind", category: "home" },
+    { id: 5, name: "Motorized Smart Blind", category: "office" },
+    { id: 6, name: "Vertical Fabric Blind", category: "more" },
+    { id: 7, name: "Translucent Roller", category: "home" },
+    { id: 8, name: "Corporate Dual Blind", category: "office" },
+    { id: 9, name: "Bamboo Pattern Blind", category: "more" },
+    { id: 10, name: "Living Room Zebra", category: "home" },
+    { id: 11, name: "Conference Room Blind", category: "office" },
+    { id: 12, name: "Custom Printed Blind", category: "more" },
+    { id: 13, name: "Bedroom Blackout", category: "home" },
+    { id: 14, name: "Executive Office Blind", category: "office" },
+    { id: 15, name: "Patio Sunscreen", category: "more" },
+    { id: 16, name: "Kitchen Roller Blind", category: "home" },
+    { id: 17, name: "Reception Zebra Blind", category: "office" },
+    { id: 18, name: "Luxury Roman Blind", category: "more" }
+];
 
 document.addEventListener("DOMContentLoaded", () => {
     
-    // 1. DYNAMICALLY GENERATE 18 PRODUCT CARDS WITH CATEGORIES AND RATINGS
+    // 1. DYNAMICALLY GENERATE 18 PRODUCT CARDS 
     const galleryGrid = document.getElementById('gallery-grid');
-    const categories = ['home', 'office', 'more']; // Categories for the filter
     
-    // Loop only 18 times now
-    for (let i = 1; i <= 18; i++) {
-        const message = `Hi Agastya Window Blinds, I am interested in buying Design #${i}. Can you provide more details?`;
+    productData.forEach(product => {
+        const message = `Hi Agastya Window Blinds, I am interested in buying the ${product.name}. Can you provide more details?`;
         const encodedMessage = encodeURIComponent(message);
         const waLink = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
         
-        const imgPath = `assets/design${i}.jpg`;
-        
-        // Assign a category systematically so the filters work nicely out of the box
-        const assignedCategory = categories[i % 3]; 
+        // This ensures it still loads assets/design1.jpg, assets/design2.jpg, etc.
+        const imgPath = `assets/design${product.id}.jpg`;
         
         // Generate a random rating between 4.5 and 5.0 for aesthetics
         const rating = (Math.random() * (5.0 - 4.5) + 4.5).toFixed(1);
 
         const cardHTML = `
-            <div class="product-card fade-up" data-category="${assignedCategory}">
+            <div class="product-card fade-up" data-category="${product.category}">
                 <div class="img-container" onclick="openLightbox('${imgPath}')">
-                    <img src="${imgPath}" alt="Agastya Blind Design ${i}" loading="lazy">
+                    <img src="${imgPath}" alt="${product.name}" loading="lazy">
                 </div>
                 <div class="product-info">
-                    <h3>Design #${i} 
+                    <h3>${product.name} 
                         <span>
                             <span class="stars">★★★★★</span>
                             <span class="rating-text">${rating}</span>
@@ -39,7 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
         `;
         galleryGrid.insertAdjacentHTML('beforeend', cardHTML);
-    }
+    });
 
     // 2. PRODUCT FILTERS LOGIC
     const filterBtns = document.querySelectorAll('.filter-btn');
